@@ -1,0 +1,17 @@
+﻿  Card.cpp
+  JeuBelote.cpp
+C:\Users\speci\source\repos\JeuBelote\JeuBelote\JeuBelote.cpp(62,15): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\Users\speci\source\repos\JeuBelote\JeuBelote\JeuBelote.cpp(76,27): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\speci\source\repos\JeuBelote\JeuBelote\JeuBelote.cpp(80,27): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\speci\source\repos\JeuBelote\JeuBelote\JeuBelote.cpp(93,31): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\speci\source\repos\JeuBelote\JeuBelote\JeuBelote.cpp(98,31): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\speci\source\repos\JeuBelote\JeuBelote\JeuBelote.cpp(106,31): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\speci\source\repos\JeuBelote\JeuBelote\JeuBelote.cpp(112,31): warning C4018: '<' : incompatibilité signed/unsigned
+  Player.cpp
+C:\Users\speci\source\repos\JeuBelote\JeuBelote\Player.cpp(22,20): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\speci\source\repos\JeuBelote\JeuBelote\Player.cpp(32,20): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\speci\source\repos\JeuBelote\JeuBelote\Player.cpp(52,21): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\speci\source\repos\JeuBelote\JeuBelote\Player.cpp(68,22): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\speci\source\repos\JeuBelote\JeuBelote\Player.cpp(77,22): warning C4018: '<' : incompatibilité signed/unsigned
+  Génération de code en cours...
+  JeuBelote.vcxproj -> C:\Users\speci\source\repos\JeuBelote\Debug\JeuBelote.exe
