@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <string>
 #include <vector>
 #include "Card.h"
@@ -11,7 +10,6 @@ private:
 	int additionalPoints;
 
 public:
-	Team() {};
 	~Team() {};
 
 	void addCards(vector<Card> cards);

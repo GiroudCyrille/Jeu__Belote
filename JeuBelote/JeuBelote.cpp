@@ -1,12 +1,8 @@
-// JeuBelote.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
-#include "Card.h"
-#include "Team.h"
-#include "Player.h"
-#include <time.h>
+#include "JeuBelote.h"
+#include "PlayerAI.h"
+#include "PlayerHuman.h"
 
-using namespace std;
-
-void loadCards(vector<Card>& cards, Symbol symbol)
+void JeuBelote::loadCards(Symbol symbol)
 {
     cards.push_back(Card(11, 11, symbol, Cards::As));
     cards.push_back(Card(10, 10, symbol, Cards::Dix));
@@ -18,15 +14,23 @@ void loadCards(vector<Card>& cards, Symbol symbol)
     cards.push_back(Card(0, 0, symbol, Cards::Sept));
 }
 
-void loadAllCards(vector<Card>& cards)
+void JeuBelote::loadAllCards()
 {
-    loadCards(cards, Symbol::Carreau);
-    loadCards(cards, Symbol::Coeur);
-    loadCards(cards, Symbol::Pique);
-    loadCards(cards, Symbol::Trefle);
+    loadCards(Symbol::Carreau);
+    loadCards(Symbol::Coeur);
+    loadCards(Symbol::Pique);
+    loadCards(Symbol::Trefle);
 }
 
-int determinsWinner(vector<Card>& playCards, Player players[], bool last)
+void JeuBelote::loadPlayers()
+{
+    players.push_back(new PlayerHuman(&firstTeam));
+    players.push_back(new PlayerAI(&secondTeam));
+    players.push_back(new PlayerAI(&firstTeam));
+    players.push_back(new PlayerAI(&secondTeam));
+}
+
+int JeuBelote::determinsWinner(bool last)
 {
     Card winCard;
 
@@ -45,29 +49,25 @@ int determinsWinner(vector<Card>& playCards, Player players[], bool last)
         }
     }
 
-    players[winCard.getIndexPlayer()].getTeam()->addCards(playCards);
+    players[winCard.getIndexPlayer()]->getTeam()->addCards(playCards);
     cout << "Le joueur " << winCard.getIndexPlayer() << " a gagner" << endl;
     playCards.clear();
 
     if (last) {
-        players[winCard.getIndexPlayer()].getTeam()->setAdditionalPoints(10);
+        players[winCard.getIndexPlayer()]->getTeam()->setAdditionalPoints(10);
         cout << "L'equipe gagnante remporte 10 points supplémentaires.";
     }
 
     return winCard.getIndexPlayer();
 }
 
-int main()
+void JeuBelote::play()
 {
     srand(time(NULL));
     int atout, actualPlayer = 0;
     bool play = true;
-    Team firstTeam;
-    Team secondTeam;
-    vector<Card> cards;
-    vector<Card> playCards;
-    Player players[4]{ Player(&firstTeam, false), Player(&secondTeam, true), Player(&firstTeam, true), Player(&secondTeam, true) };
-    loadAllCards(cards);
+    loadAllCards();
+    loadPlayers();
 
     while (play)
     {
@@ -78,12 +78,12 @@ int main()
 
         cout << "On distribue le jeu de belottes.." << endl;
         for (int i = 0; i < size(players); i++)
-            players[i].setCards(cards, i);
+            players[i]->setCards(cards, i);
 
         for (int i = 0; i < 8; i++)
         {
             if (actualPlayer == 0) {
-                players[0].showCards();
+                players[0]->showCards();
                 cout << "Saisir l'atout : " << endl << "- 0:Carreau" << endl << "- 1:Trefle" << endl << "- 2:Pique" << endl << "- 3:Coeur" << endl;
                 cin >> atout;
             }
@@ -91,14 +91,14 @@ int main()
                 atout = rand() % 4 + 0;
 
             for (int i = 0; i < size(players); i++)
-                players[i].setAtout(atout, true);
+                players[i]->setAtout(atout, true);
 
-            players[actualPlayer].play(playCards);
+            players[actualPlayer]->play(playCards);
 
             for (int i = 0; i < size(players); i++)
             {
                 if (i != actualPlayer)
-                    players[i].play(playCards);
+                    players[i]->play(playCards);
             }
 
             cout << "Les cartes sur la table sont  :" << endl;
@@ -107,10 +107,10 @@ int main()
                 cout << playCards[i].toString(i) << endl;
 
             cout << "Fin du pli numero " << i + 1 << endl;
-            actualPlayer = determinsWinner(playCards, players, i == 8);
+            actualPlayer = determinsWinner(i == 8);
 
             for (int i = 0; i < size(players); i++)
-                players[i].setAtout(atout, false);
+                players[i]->setAtout(atout, false);
         }
 
         if (firstTeam.getPoints() > secondTeam.getPoints()) {
@@ -130,7 +130,7 @@ int main()
             play = false;
 
         system("CLS");
-        loadAllCards(cards);
+        loadAllCards();
         firstTeam.clear();
         secondTeam.clear();
     }

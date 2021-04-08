@@ -141,12 +141,18 @@
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="JeuBelote.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerAI.cpp" />
+    <ClCompile Include="PlayerHuman.cpp" />
     <ClCompile Include="Team.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h" />
+    <ClInclude Include="JeuBelote.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerAI.h" />
+    <ClInclude Include="PlayerHuman.h" />
     <ClInclude Include="Team.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
